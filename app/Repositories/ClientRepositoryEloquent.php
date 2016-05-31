@@ -10,6 +10,7 @@ namespace CodeProject\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use CodeProject\Entities\Client;
+use CodeProject\Repositories\ClientRepository;
 
 /**
  * Description of ClientRepositoryEloquent
