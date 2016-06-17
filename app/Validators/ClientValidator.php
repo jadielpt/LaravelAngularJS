@@ -13,7 +13,7 @@ use Prettus\Validator\LaravelValidator;
 /**
  * 
  *
- * @author Jadiel
+ * @author Jadiel Cordeiro Filho
  */
 class ClientValidator extends LaravelValidator 
 {
