@@ -4,12 +4,12 @@ namespace CodeProject\Services;
 
 use CodeProject\Repositories\ClientRepository;
 use CodeProject\Validators\ClientValidator;
-use Illuminate\Contracts\Validation\ValidationException;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 /**
  * Description of ClientService
  *
- * @author Jadiel
+ * @author Jadiel Cordeiro Filho
  */
 class ClientService {
     
@@ -29,12 +29,13 @@ class ClientService {
     public function create(array $data)
     {
         try {
-           $this->validator->with($data)->passes0Fail();
+           $this->validator->with($data)->passesOrFail();
            return $this->repository->create($data);
-        } catch (ValidationException $e) {
+        } catch (ValidatorException $e) {
            return [
                'error'=>true,
-               'message'=>$e->getMessage()
+               'message'=> 'Erro ao cadastrar o cliente, aluns campos são necessários'
+               
            ];
         }
     }
@@ -42,12 +43,12 @@ class ClientService {
     public function update(array $data, $id)
     {
         try {
-           $this->validator->with($data)->passes0Fail();
+           $this->validator->with($data)->passesOrFail();
            return $this->repository->update($data, $id);
-        } catch (ValidationException $e) {
+        } catch (ValidatorException $e) {
            return [
                'error'=>true,
-               'message'=>$e->getMessage()
+               'message'=>'Erro ao atualizar Cliente'
            ];
         }
     }
