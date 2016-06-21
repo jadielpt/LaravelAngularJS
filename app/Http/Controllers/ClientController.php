@@ -58,13 +58,16 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         try {
-             return $this->service->create($request->all());
+           
+            return $this->service->create($request->all()); 
+        
+           
         } catch (QueryException $e) {
             
           return [
               'error'=>true,
               'message'=> 'Erro ao cadastrar o cliente, aluns campos são necessários',
-              'messages'=> $error->getMessages(),
+              
           ];
         }
         catch(\Exception $e){
@@ -87,7 +90,7 @@ class ClientController extends Controller
                 'message'=>"Cliente deletado com sucesso"
             ];
         } catch (QueryException $e) {
-            return $this->errorBag('Cliente não pode ser apagado pois existe um ou mais projetos cinculados a ele.');
+            return $this->errorBag('Cliente não pode ser apagado pois existe um ou mais projetos vinculados a ele.');
         }
     }
     
