@@ -2,8 +2,8 @@
 
 namespace CodeProject\Services;
 
-use CodeProject\Repositories\ClientRepository;
-use CodeProject\Validators\ClientValidator;
+use CodeProject\Repositories\ProjectNoteRepository;
+use CodeProject\Validators\ProjectNoteValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 
@@ -12,34 +12,20 @@ use Prettus\Validator\Exceptions\ValidatorException;
  *
  * @author Jadiel Cordeiro Filho
  */
-class ClientService {
+class ProjectNoteService {
     
     protected $repository;
     /**
      * 
-     * @param ClientRepository $repository
-     * @param ClientValidator $validator
+     * @param ProjectRepository $repository
+     * @param ProjectValidator $validator
      */
     
-    public function __construct(ClientRepository $repository,ClientValidator $validator)
+    public function __construct(ProjectNoteRepository $repository,ProjectNoteValidator $validator)
     {
         $this->repository = $repository;
         $this->validator = $validator;
     }
-    
-    /*
-     * 
-     */
-     public function index(Request $request)
-            
-    {
-        try{
-            return $this->repository->all();
-        } catch (\Exception $e) {
-             return ['error'=> 'Ocorreu um erro ao listar os clientes.'];
-        }
-    } 
-    
     
     public function create(array $data)
     {
@@ -49,7 +35,7 @@ class ClientService {
         } catch (ValidatorException $e) {
            return [
                'error'=>true,
-               'message'=> 'Erro ao cadastrar o cliente, aluns campos são necessários'
+               'message'=> 'Erro ao cadastrar o Notes, aluns campos são necessários'
                
            ];
         }
@@ -63,7 +49,7 @@ class ClientService {
         } catch (ValidatorException $e) {
            return [
                'error'=>true,
-               'message'=>'Erro ao atualizar cliente'
+               'message'=>'Erro ao atualizar Notes'
            ];
         }
     }

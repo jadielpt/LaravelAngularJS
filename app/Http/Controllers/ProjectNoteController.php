@@ -3,14 +3,14 @@
 namespace CodeProject\Http\Controllers;
 
 use Illuminate\Http\Request;
-use CodeProject\Repositories\ClientRepository;
-use CodeProject\Services\ClientService;
+use CodeProject\Repositories\ProjectNoteRepository;
+use CodeProject\Services\ProjectNoteService;
 
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 
-class ClientController extends Controller
+class ProjectNoteController extends Controller
 {
     /**
      *
@@ -31,7 +31,7 @@ class ClientController extends Controller
      * @param ClientService $service
      */
     
-    public function __construct(ClientRepository $repository, ClientService $service)
+    public function __construct(ProjectNoteRepository $repository, ProjectNoteService $service)
     {
       $this->repository = $repository; 
       $this->service = $service;
@@ -42,11 +42,11 @@ class ClientController extends Controller
      * @return Response
      */
     
-    public function index()
+    public function index($id)
             
     {
       
-            return $this->repository->all();
+            return $this->repository->findWhere(['project_id'=>$id]);
         
     } 
     /**

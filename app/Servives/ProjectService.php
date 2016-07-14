@@ -35,7 +35,7 @@ class ProjectService {
         } catch (ValidatorException $e) {
            return [
                'error'=>true,
-               'message'=> 'Erro ao cadastrar o cliente, aluns campos são necessários'
+               'message'=> 'Erro ao cadastrar o projeto, aluns campos são necessários'
                
            ];
         }
@@ -49,7 +49,7 @@ class ProjectService {
         } catch (ValidatorException $e) {
            return [
                'error'=>true,
-               'message'=>'Erro ao atualizar Cliente'
+               'message'=>'Erro ao atualizar Projeto'
            ];
         }
     }

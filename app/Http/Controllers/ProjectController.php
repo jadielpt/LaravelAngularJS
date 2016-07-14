@@ -3,14 +3,14 @@
 namespace CodeProject\Http\Controllers;
 
 use Illuminate\Http\Request;
-use CodeProject\Repositories\ClientRepository;
-use CodeProject\Services\ClientService;
+use CodeProject\Repositories\ProjectRepository;
+use CodeProject\Services\ProjectService;
 
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 
-class ClientController extends Controller
+class ProjectController extends Controller
 {
     /**
      *
@@ -31,7 +31,7 @@ class ClientController extends Controller
      * @param ClientService $service
      */
     
-    public function __construct(ClientRepository $repository, ClientService $service)
+    public function __construct(ProjectRepository $repository, ProjectService $service)
     {
       $this->repository = $repository; 
       $this->service = $service;
@@ -58,10 +58,10 @@ class ClientController extends Controller
         try{
             return $this->repository->find($id);
         } catch (QueryException $e) {
-            return ['error'=>true, 'Cliente não encontrado']; 
+            return ['error'=>true, 'Projecto não encontrado']; 
         }
          catch(\Exception $e){
-         return ['error'=> 'Ocorreu um erro ao exibir o cliente'];        
+         return ['error'=> 'Ocorreu um erro ao exibir o Projeto'];        
         }
     }
     
@@ -82,12 +82,12 @@ class ClientController extends Controller
             
           return [
               'error'=>true,
-              'message'=> 'Erro ao cadastrar o cliente, aluns campos são necessários',
+              'message'=> 'Erro ao cadastrar o projeto, aluns campos são necessários',
               
           ];
         }
         catch(\Exception $e){
-            return ['error'=> 'Ocorreu um erro ao cadastrar o cliente.'];
+            return ['error'=> 'Ocorreu um erro ao cadastrar o Projeto.'];
         }
     } 
     
@@ -103,10 +103,10 @@ class ClientController extends Controller
            $this->repository->find($id)->delete(); 
             return [
                 'success'=>true,
-                'message'=>"Cliente deletado com sucesso"
+                'message'=>"Projeto deletado com sucesso"
             ];
         } catch (QueryException $e) {
-            return $this->errorBag('Cliente não pode ser apagado pois existe um ou mais projetos vinculados a ele.');
+            return $this->errorBag('Projeto não pode ser apagado pois existe um ou mais projetos vinculados a ele.');
         }
     }
     
