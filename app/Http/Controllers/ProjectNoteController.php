@@ -54,14 +54,14 @@ class ProjectNoteController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Request;
      */
-    public function show($id){
+    public function show($id, $noteId){
         try{
-            return $this->repository->find($id);
+            return $this->repository->findWhere(['project_id' => $id, 'id'=>$noteId]);
         } catch (QueryException $e) {
-            return ['error'=>true, 'Cliente não encontrado']; 
+            return ['error'=>true, 'Notas não encontrado']; 
         }
          catch(\Exception $e){
-         return ['error'=> 'Ocorreu um erro ao exibir o cliente'];        
+         return ['error'=> 'Ocorreu um erro ao exibir a Nota'];        
         }
     }
     
@@ -97,10 +97,10 @@ class ProjectNoteController extends Controller
      */
     
     
-    public function destroy($id)
+    public function destroy($id, $noteId)
     {
         try {
-           $this->repository->find($id)->delete(); 
+           $this->repository->find($noteId)->delete(); 
             return [
                 'success'=>true,
                 'message'=>"Cliente deletado com sucesso"
@@ -110,10 +110,10 @@ class ProjectNoteController extends Controller
         }
     }
     
-       public function update(Request $request, $id)
+       public function update(Request $request, $id, $noteId)
          {
           
-              return $this->service->update($request->all(), $id);
+              return $this->service->update($request->all(), $noteId);
           
          }
        
